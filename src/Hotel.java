@@ -93,6 +93,7 @@ public class Hotel {
         }
 
         System.out.println();
+        System.out.println();
         System.out.println("SEZNAM REZERVACÍ hotelu " + hotel1Name + ":");
         helpBookingNumer = 0;
         for (Booking booking : bookingsList) {
@@ -136,7 +137,7 @@ public class Hotel {
         for (String bookingsInOneLine : allBookingsInOneLine) {System.out.println(bookingsInOneLine);}
 
         System.out.println();
-        System.out.println("STATISTIKA hotelu " + hotel1Name);
+        System.out.println("STATISTIKA hotelu " + hotel1Name + ":");
         System.out.println("               Celkový počet rezervací: " + bookingManager.getNumberOfBookings());
         System.out.println("   Průměrný počet hostů na 1 rezervaci: " + bookingManager.getAverageNumberGuests());
         System.out.println("    Celkový počet pracovních rezervací: " + bookingManager.getNumberOfWorkingBookings());
