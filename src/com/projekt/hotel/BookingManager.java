@@ -1,15 +1,12 @@
 package com.projekt.hotel;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class BookingManager {
     // Pomocné proměnné
-    //  int i = 0; int j = 0; int k = 0;
     int helpBookingNumerBM = 0; double helpAverageBM = 0;
 
     DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
@@ -46,6 +43,25 @@ public class BookingManager {
         }
         return helpBookingNumerBM;
     }
+
+    public int getNumberOfOneDayBookings() {
+        helpBookingNumerBM = 0;
+        for (Booking booking : bookingListBM) {if (booking.getDaysNumber() == 1) {helpBookingNumerBM++;}}
+        return helpBookingNumerBM;
+    }
+
+    public int getNumberOfTwoDayBookings() {
+        helpBookingNumerBM = 0;
+        for (Booking booking : bookingListBM) {if (booking.getDaysNumber() == 2) {helpBookingNumerBM++;}}
+        return helpBookingNumerBM;
+    }
+
+    public int getNumberMoreTwoDayBookings() {
+        helpBookingNumerBM = 0;
+        for (Booking booking : bookingListBM) {if (booking.getDaysNumber() > 2) {helpBookingNumerBM++;}}
+        return helpBookingNumerBM;
+    }
+
 
     public List<String> getAllBookingsInOneLine() {
 

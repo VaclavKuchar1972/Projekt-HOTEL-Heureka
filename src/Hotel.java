@@ -142,8 +142,9 @@ public class Hotel {
         System.out.println("   Průměrný počet hostů na 1 rezervaci: " + bookingManager.getAverageNumberGuests());
         System.out.println("    Celkový počet pracovních rezervací: " + bookingManager.getNumberOfWorkingBookings());
         System.out.println("   Celkový počet rekreačních rezervací: " + bookingManager.getNumberOfRecreatinoBookings());
-
-        System.out.println();
+        System.out.println("  Celkový počet jednodenních rezervací: " + bookingManager.getNumberOfOneDayBookings());
+        System.out.println("   Celkový počet dvoudenních rezervací: " + bookingManager.getNumberOfTwoDayBookings());
+        System.out.println("    Celkový počet rezervací nad 2 noci: " + bookingManager.getNumberMoreTwoDayBookings());
         System.out.println("       Prvních 8 rekreačních rezervací:");
         for (String first8InOneLine : first8BookingsInOneLine) {System.out.println(first8InOneLine);}
 
