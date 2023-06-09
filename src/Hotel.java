@@ -13,7 +13,7 @@ public class Hotel {
         // Pomocné proměnné
         int i = 0; int j = 0; int k = 0;
         int helpBookingNumer = 0;
-        String hotel1Name = "MODRÁ HVĚZDA";
+        String hotel1Name = "HEUREKA";
 
         List<Room> roomsList = new ArrayList<>();
         roomsList.add(new Room(1, 1, true, true, new BigDecimal("1000")));
