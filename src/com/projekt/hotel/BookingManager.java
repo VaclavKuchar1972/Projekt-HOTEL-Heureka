@@ -47,11 +47,6 @@ public class BookingManager {
         return helpBookingNumerBM;
     }
 
-    public void BookingToOneLine () {
-
-        this.bookingListBM = bookingListBM;
-    }
-
     public List<String> getAllBookingsInOneLine() {
 
         List<String> bookingsBM = new ArrayList<>();
