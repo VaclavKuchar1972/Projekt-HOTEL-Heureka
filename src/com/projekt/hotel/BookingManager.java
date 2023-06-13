@@ -4,152 +4,134 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class BookingManager {
-    // Pomocné proměnné
-    int helpBookingNumerBM = 0; double helpAverageBM = 0;
-
-    DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-
+    private int helpBookingNumberBM = 0;
+    private double helpAverageBM = 0;
+    private DecimalFormat decimalFormatBM = new DecimalFormat("#,##0.00");
     private List<Booking> bookingListBM;
 
-    public BookingManager() {this.bookingListBM = new ArrayList<>();}
-    public List<Booking> getBookingListBM() {return bookingListBM;}
-
-    public void addBooking(Booking booking) {
-        bookingListBM.add(booking);}
-
-    public int getNumberOfBookings() {return bookingListBM.size();}
-
-    public String getAverageNumberGuests() {
-        helpBookingNumerBM = 0;
-        for (Booking booking : bookingListBM) {helpBookingNumerBM = helpBookingNumerBM + booking.getGuests().size();}
-        helpAverageBM = (double) helpBookingNumerBM / bookingListBM.size();
-        return decimalFormat.format(helpAverageBM).replace(".", ",");
+    public BookingManager() {
+        this.bookingListBM = new ArrayList<>();
     }
 
-    public int getNumberOfWorkingBookings() {
-        helpBookingNumerBM = 0;
+    public List<Booking> getBookingListBM() {
+        return bookingListBM;
+    }
+
+    public void addBookingBM(Booking booking) {
+        bookingListBM.add(booking);
+    }
+
+    public int getNumberOfBookingsBM() {
+        return bookingListBM.size();
+    }
+
+    public String getAverageNumberGuestsBM() {
+        helpBookingNumberBM = 0;
         for (Booking booking : bookingListBM) {
-            if (booking.getIsWorkStay() == true) {helpBookingNumerBM = helpBookingNumerBM + 1;}
+            helpBookingNumberBM += booking.getGuests().size();
         }
-        return helpBookingNumerBM;
+        helpAverageBM = (double) helpBookingNumberBM / bookingListBM.size();
+        return decimalFormatBM.format(helpAverageBM).replace(".", ",");
     }
 
-    public int getNumberOfRecreatinoBookings() {
-        helpBookingNumerBM = 0;
+    public int getNumberOfWorkingBookingsBM() {
+        helpBookingNumberBM = 0;
         for (Booking booking : bookingListBM) {
-            if (booking.getIsWorkStay() == false) {helpBookingNumerBM = helpBookingNumerBM + 1;}
-        }
-        return helpBookingNumerBM;
-    }
-
-    public int getNumberOfOneDayBookings() {
-        helpBookingNumerBM = 0;
-        for (Booking booking : bookingListBM) {if (booking.getDaysNumber() == 1) {helpBookingNumerBM++;}}
-        return helpBookingNumerBM;
-    }
-
-    public int getNumberOfTwoDayBookings() {
-        helpBookingNumerBM = 0;
-        for (Booking booking : bookingListBM) {if (booking.getDaysNumber() == 2) {helpBookingNumerBM++;}}
-        return helpBookingNumerBM;
-    }
-
-    public int getNumberMoreTwoDayBookings() {
-        helpBookingNumerBM = 0;
-        for (Booking booking : bookingListBM) {if (booking.getDaysNumber() > 2) {helpBookingNumerBM++;}}
-        return helpBookingNumerBM;
-    }
-
-
-    public List<String> getAllBookingsInOneLine() {
-
-        List<String> bookingsBM = new ArrayList<>();
-
-        helpBookingNumerBM = 0;
-        for (Booking booking : bookingListBM) {
-            helpBookingNumerBM = helpBookingNumerBM + 1;
-            String bookingNumerBM = Integer.toString(helpBookingNumerBM);;
-
-
-            // Opakující se kód 1/2
-            boolean commercialGuestBM = booking.getGuests().get(0).getCommercialGuest();
-            String companyNameBM;
-            if (commercialGuestBM == true) {
-                companyNameBM = "firma, " + booking.getGuests().get(0).getCompanyNameAndCompanyVatNumber() + ", ";
+            if (booking.getIsWorkStay()) {
+                helpBookingNumberBM++;
             }
-            else {companyNameBM = "";}
-            List<String> guestNamesBM = new ArrayList<>();
-            for (Guest guest : booking.getGuests()) {guestNamesBM.add(guest.getFullNameAndDateBirth());}
+        }
+        return helpBookingNumberBM;
+    }
 
-            // Metoda String."join()" mi spojuje Stringy v Listu guestNameBM a přidává String Oddělovač - to je pro mě
-            String guestNameBM = String.join(", ", guestNamesBM);
+    public int getNumberOfRecreationBookingsBM() {
+        helpBookingNumberBM = 0;
+        for (Booking booking : bookingListBM) {
+            if (!booking.getIsWorkStay()) {
+                helpBookingNumberBM++;
+            }
+        }
+        return helpBookingNumberBM;
+    }
 
-            String bookingRangeBM = booking.getBookingRange();
-            int daysNumberBM = booking.getDaysNumber();
-            String workStayBM = booking.getWorkStay();
-            int roomNumberBM = booking.getRoom().getRoomNumber();
-            int numberOfBedsBM = booking.getRoom().getNumberOfBeds();
-            String balconyBM = booking.getRoom().getTheBalconyText();
-            String seaViewBM = booking.getRoom().getSeaViewText();
-            String pricePerNightBM = String.valueOf(booking.getRoom().getPricePerNight());
-            String totalPriceBM = String.valueOf(booking.getTotalPrice());
-            // KONEC - Opakující se kód 1/2
+    public int getNumberOfOneDayBookingsBM() {
+        helpBookingNumberBM = 0;
+        for (Booking booking : bookingListBM) {
+            if (booking.getDaysNumber() == 1) {
+                helpBookingNumberBM++;
+            }
+        }
+        return helpBookingNumberBM;
+    }
 
+    public int getNumberOfTwoDayBookingsBM() {
+        helpBookingNumberBM = 0;
+        for (Booking booking : bookingListBM) {
+            if (booking.getDaysNumber() == 2) {
+                helpBookingNumberBM++;
+            }
+        }
+        return helpBookingNumberBM;
+    }
 
-            String bookingInfoBM = "   čr: " + bookingNumerBM + ", "+ companyNameBM + "host, " + guestNameBM + ", termín: "
-                    + bookingRangeBM + ", nocí: " + daysNumberBM + ", pobyt: " +  workStayBM + ", pokoj: "
-                    + roomNumberBM + ", lůžka: " + numberOfBedsBM + ", balkón: " + balconyBM + ", výhled na more: "
-                    + seaViewBM + ", cena/noc: " + pricePerNightBM + ",- Kč, cena celkem: " + totalPriceBM + ",- Kč";
+    public int getNumberOfMoreThanTwoDayBookingsBM() {
+        helpBookingNumberBM = 0;
+        for (Booking booking : bookingListBM) {
+            if (booking.getDaysNumber() > 2) {
+                helpBookingNumberBM++;
+            }
+        }
+        return helpBookingNumberBM;
+    }
 
-            bookingsBM.add(bookingInfoBM);
+    private String getBookingInfoBM(Booking booking) {
+        boolean commercialGuestBM = booking.getGuests().get(0).getCommercialGuest();
+        String companyNameBM = commercialGuestBM ? "firma, " + booking.getGuests().get(0).getCompanyNameAndCompanyVatNumber() + ", " : "";
+        List<String> guestNamesBM = new ArrayList<>();
+        for (Guest guest : booking.getGuests()) {
+            guestNamesBM.add(guest.getFullNameAndDateBirth());
+        }
+        String guestNameBM = String.join(", ", guestNamesBM);
+        String bookingRangeBM = booking.getBookingRange();
+        int daysNumberBM = booking.getDaysNumber();
+        String workStayBM = booking.getWorkStay();
+        int roomNumberBM = booking.getRoom().getRoomNumber();
+        int numberOfBedsBM = booking.getRoom().getNumberOfBeds();
+        String balconyBM = booking.getRoom().getTheBalconyText();
+        String seaViewBM = booking.getRoom().getSeaViewText();
+        String pricePerNightBM = String.valueOf(booking.getRoom().getPricePerNight());
+        String totalPriceBM = String.valueOf(booking.getTotalPrice());
+
+        return "   čr: " + helpBookingNumberBM + ", " + companyNameBM + "host, " + guestNameBM + ", termín: " +
+                bookingRangeBM + ", nocí: " + daysNumberBM + ", pobyt: " + workStayBM + ", pokoj: " +
+                roomNumberBM + ", lůžka: " + numberOfBedsBM + ", balkón: " + balconyBM + ", výhled na more: " +
+                seaViewBM + ", cena/noc: " + pricePerNightBM + ",- Kč, cena celkem: " + totalPriceBM + ",- Kč";
+    }
+
+    public List<String> getAllBookingsInOneLineBM() {
+        List<String> bookingsBM = new ArrayList<>();
+        helpBookingNumberBM = 0;
+        for (Booking booking : bookingListBM) {
+            helpBookingNumberBM++;
+            String bookingInfo = getBookingInfoBM(booking);
+            bookingsBM.add(bookingInfo);
         }
         return bookingsBM;
     }
 
-    public List<String> getFirst8BookingsInOneLine() {
-
+    public List<String> getFirst8BookingsInOneLineBM() {
         List<String> bookingsFirst8BM = new ArrayList<>();
-
-
-        // Opakující se kód 2/2
-        helpBookingNumerBM = 0;
+        helpBookingNumberBM = 0;
         for (Booking booking : bookingListBM) {
-            if(booking.getIsWorkStay() == false) {
-                helpBookingNumerBM = helpBookingNumerBM + 1;
-                boolean commercialGuestBM = booking.getGuests().get(0).getCommercialGuest();
-                String companyNameBM;
-                if (commercialGuestBM == true) {
-                    companyNameBM = "firma, " + booking.getGuests().get(0).getCompanyNameAndCompanyVatNumber() + ", ";
-                }
-                else {companyNameBM = "";}
-                List<String> guestNamesBM = new ArrayList<>();
-                for (Guest guest : booking.getGuests()) {guestNamesBM.add(guest.getFullNameAndDateBirth());}
-
-                // Metoda String."join()" mi spojuje Stringy v Listu guestNameBM a přidává String Oddělovač - to je pro mě
-                String guestNameBM = String.join(", ", guestNamesBM);
-
-                String bookingRangeBM = booking.getBookingRange();
-                int daysNumberBM = booking.getDaysNumber();
-                String workStayBM = booking.getWorkStay();
-                int roomNumberBM = booking.getRoom().getRoomNumber();
-                int numberOfBedsBM = booking.getRoom().getNumberOfBeds();
-                String balconyBM = booking.getRoom().getTheBalconyText();
-                String seaViewBM = booking.getRoom().getSeaViewText();
-                String pricePerNightBM = String.valueOf(booking.getRoom().getPricePerNight());
-                String totalPriceBM = String.valueOf(booking.getTotalPrice());
-                // KONEC - Opakující se kód 2/2
-
-
-                String bookingInfoBM = "          " + helpBookingNumerBM + ". rr: " + companyNameBM + "host, " + guestNameBM + ", termín: "
-                        + bookingRangeBM + ", nocí: " + daysNumberBM + ", pobyt: " +  workStayBM + ", pokoj: "
-                        + roomNumberBM + ", lůžka: " + numberOfBedsBM + ", balkón: " + balconyBM + ", výhled na more: "
-                        + seaViewBM + ", cena/noc: " + pricePerNightBM + ",- Kč, cena celkem: " + totalPriceBM + ",- Kč";
-
-                bookingsFirst8BM.add(bookingInfoBM);
+            if (!booking.getIsWorkStay()) {
+                helpBookingNumberBM++;
+                String bookingInfo = getBookingInfoBM(booking);
+                bookingsFirst8BM.add("          " + helpBookingNumberBM + ". " + bookingInfo);
             }
-            if (helpBookingNumerBM == 8) {break;}
+            if (helpBookingNumberBM == 8) {
+                break;
+            }
         }
         return bookingsFirst8BM;
     }

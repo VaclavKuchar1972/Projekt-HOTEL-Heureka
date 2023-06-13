@@ -33,8 +33,6 @@ public class Hotel {
                 "", "zatím neznámý", null));
         guestsList.add(new Guest(false, "", 0,
                 "Alena", "Krásová", LocalDate.of(1970, 12, 24)));
-        guestsList.add(new Guest(true, "CK Doom Day", 38526596,
-                "", "zatím neznámý", null));
 
         List<Booking> bookingsList = new ArrayList<>();
         bookingsList.add(new Booking(roomsList.get(0), guestsList.subList(0, 1),
@@ -65,10 +63,6 @@ public class Hotel {
                     LocalDate.of(2023, 8, i),
                     LocalDate.of(2023, 8, i + 3), true));
         }
-        bookingsList.add(new Booking(roomsList.get(2), guestsList.subList(6, 7),
-                LocalDate.of(2023, 12, 24),
-                LocalDate.of(2024, 1, 1), false));
-
 
         System.out.println();
         System.out.println("SEZNAM POKOJŮ hotelu " + hotel1Name + ":");
@@ -126,10 +120,10 @@ public class Hotel {
         BookingManager bookingManager = new BookingManager();
 
         // Provázání bookingsList s bookingListBM v BookingManageru. Vypadá to ale, že mám zbytečně nalitý dva Listy...
-        for (Booking booking : bookingsList) {bookingManager.addBooking(booking);}
+        for (Booking booking : bookingsList) {bookingManager.addBookingBM(booking);}
 
-        List<String> allBookingsInOneLine = bookingManager.getAllBookingsInOneLine();
-        List<String> first8BookingsInOneLine = bookingManager.getFirst8BookingsInOneLine();
+        List<String> allBookingsInOneLine = bookingManager.getAllBookingsInOneLineBM();
+        List<String> first8BookingsInOneLine = bookingManager.getFirst8BookingsInOneLineBM();
 
         System.out.println();
         System.out.println();
@@ -138,13 +132,13 @@ public class Hotel {
 
         System.out.println();
         System.out.println("STATISTIKA hotelu " + hotel1Name + ":");
-        System.out.println("               Celkový počet rezervací: " + bookingManager.getNumberOfBookings());
-        System.out.println("   Průměrný počet hostů na 1 rezervaci: " + bookingManager.getAverageNumberGuests());
-        System.out.println("    Celkový počet pracovních rezervací: " + bookingManager.getNumberOfWorkingBookings());
-        System.out.println("   Celkový počet rekreačních rezervací: " + bookingManager.getNumberOfRecreatinoBookings());
-        System.out.println("  Celkový počet jednodenních rezervací: " + bookingManager.getNumberOfOneDayBookings());
-        System.out.println("   Celkový počet dvoudenních rezervací: " + bookingManager.getNumberOfTwoDayBookings());
-        System.out.println("    Celkový počet rezervací nad 2 noci: " + bookingManager.getNumberMoreTwoDayBookings());
+        System.out.println("               Celkový počet rezervací: " + bookingManager.getNumberOfBookingsBM());
+        System.out.println("   Průměrný počet hostů na 1 rezervaci: " + bookingManager.getAverageNumberGuestsBM());
+        System.out.println("    Celkový počet pracovních rezervací: " + bookingManager.getNumberOfWorkingBookingsBM());
+        System.out.println("   Celkový počet rekreačních rezervací: " + bookingManager.getNumberOfRecreationBookingsBM());
+        System.out.println("  Celkový počet jednodenních rezervací: " + bookingManager.getNumberOfOneDayBookingsBM());
+        System.out.println("   Celkový počet dvoudenních rezervací: " + bookingManager.getNumberOfTwoDayBookingsBM());
+        System.out.println("    Celkový počet rezervací nad 2 noci: " + bookingManager.getNumberOfMoreThanTwoDayBookingsBM());
         System.out.println("       Prvních 8 rekreačních rezervací:");
         for (String first8InOneLine : first8BookingsInOneLine) {System.out.println(first8InOneLine);}
 
