@@ -103,7 +103,7 @@ public class BookingManager {
         String pricePerNightBM = String.valueOf(booking.getRoom().getPricePerNight());
         String totalPriceBM = String.valueOf(booking.getTotalPrice());
 
-        return "   čr: " + helpBookingNumberBM + ", " + companyNameBM + "host, " + guestNameBM + ", termín: " +
+        return "   " + companyNameBM + "host, " + guestNameBM + ", termín: " +
                 bookingRangeBM + ", nocí: " + daysNumberBM + ", pobyt: " + workStayBM + ", pokoj: " +
                 roomNumberBM + ", lůžka: " + numberOfBedsBM + ", balkón: " + balconyBM + ", výhled na more: " +
                 seaViewBM + ", cena/noc: " + pricePerNightBM + ",- Kč, cena celkem: " + totalPriceBM + ",- Kč";
@@ -127,7 +127,7 @@ public class BookingManager {
             if (!booking.getIsWorkStay()) {
                 helpBookingNumberBM++;
                 String bookingInfo = getBookingInfoBM(booking);
-                bookingsFirst8BM.add("          " + helpBookingNumberBM + ". " + bookingInfo);
+                bookingsFirst8BM.add("          " + bookingInfo);
             }
             if (helpBookingNumberBM == 8) {
                 break;
